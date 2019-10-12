@@ -1,3 +1,7 @@
 .envrc
+services/*/.classpath
 services/*/.gradle
+services/*/.project
+services/*/.settings/
+services/*/bin/
 services/*/build/

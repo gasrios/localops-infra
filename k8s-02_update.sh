@@ -1,8 +1,8 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
+set -euxo pipefail
 
 # Use this script if you want to update all services at once.
-
-set -e
 
 echo 'Updating services...'
 

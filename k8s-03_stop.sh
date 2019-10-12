@@ -1,10 +1,10 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
+set -euxo pipefail
 
 # You need to source k8s-01_start.sh, so PREVIOUS_CONTEXT will be visible here
 #
 # . ./ k8s-01_start.sh
-
-set -e
 
 echo 'Shutting localops (infra) down...'
 

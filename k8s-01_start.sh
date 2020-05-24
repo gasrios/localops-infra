@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-set -euxo pipefail
-
 # You need to source this script, so PREVIOUS_CONTEXT will be visible by k8s-03_stop.sh:
 #
 # . ./k8s-01_start.sh

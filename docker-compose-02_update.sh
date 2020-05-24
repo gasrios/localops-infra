@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-set -euxo pipefail
-
 echo 'Updating services...'
 
 docker-compose down

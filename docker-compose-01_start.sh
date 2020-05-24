@@ -1,12 +1,10 @@
 #!/usr/bin/env bash
 
-set -euxo pipefail
-
 echo 'Starting localops (infra)...'
 
 for SERVICE in $(ls services)
 do \
-	make -C services/$SERVICE clean build
+	make -C services/$SERVICE
 done
 
 docker-compose up --build &

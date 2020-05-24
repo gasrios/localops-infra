@@ -1,7 +1,5 @@
 version: "3.7"
-
 services:
-
   spreadsheet:
     build:
       context: services/hello

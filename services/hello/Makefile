@@ -5,14 +5,18 @@ ENVIRONMENT ?= local
 
 .PHONY: all clean publish deploy delete-local
 
-all: clean build publish deploy
+all: clean build build-config publish deploy
 
 clean:
 	./gradlew clean
 
 build: build/libs/hello.jar
-build/libs/hello.jar: $(shell find src/main/java)
+build/libs/hello.jar: $(shell find src/main/java -type f)
 	./gradlew bootRepackage
+
+build-config: build/$(ENVIRONMENT).yaml
+build/$(ENVIRONMENT).yaml: templates/$(ENVIRONMENT).yaml
+	mkdir -p build
 	sed \
 		's/image: REPOSITORY\/hello:.*/image: $(REPOSITORY)\/hello:$(VERSION)/' \
 		templates/$(ENVIRONMENT).yaml > build/$(ENVIRONMENT).yaml
@@ -25,6 +29,7 @@ deploy:
 	kubectl config use-context $(ENVIRONMENT)
 	kubectl apply -f build/$(ENVIRONMENT).yaml
 
-delete-local:
-	[ $(ENVIRONMENT) = local ] && kubectl delete --ignore-not-found service hello-service
-	[ $(ENVIRONMENT) = local ] && kubectl delete --ignore-not-found deployment hello-deployment
+undeploy:
+	kubectl config use-context $(ENVIRONMENT)
+	kubectl delete --ignore-not-found service hello-service
+	kubectl delete --ignore-not-found deployment hello-deployment

@@ -5,7 +5,9 @@ ENVIRONMENT ?= local
 
 .PHONY: all clean publish deploy delete-local
 
-all: clean build build-config publish deploy
+default: clean build build-config publish
+
+all: default deploy
 
 clean:
 	./gradlew clean

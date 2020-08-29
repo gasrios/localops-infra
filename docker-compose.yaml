@@ -1,6 +1,6 @@
 version: "3.7"
 services:
-  spreadsheet:
+  hello:
     build:
       context: services/hello
     ports:

@@ -19,8 +19,9 @@ public class Hello {
 	}
 
 	@RequestMapping(method = RequestMethod.GET, value  = "/")
-	public ResponseEntity<String> root() throws IOException {
-		return new ResponseEntity<String>("Hello world!", HttpStatus.OK);
-	}
+	public ResponseEntity<String> root() throws IOException { return new ResponseEntity<String>(HttpStatus.OK); }
+
+	@RequestMapping(method = RequestMethod.GET, value  = "/hello")
+	public ResponseEntity<String> hello() throws IOException { return new ResponseEntity<String>("Hello world!", HttpStatus.OK); }
 
 }

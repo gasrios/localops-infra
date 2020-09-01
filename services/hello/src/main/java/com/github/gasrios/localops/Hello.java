@@ -10,6 +10,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+/*
+ * A very simple example to test that your localops (infra) (https://github.com/gasrios/localops-infra)
+ * based deployment worked.
+ */
 @SpringBootApplication
 @RestController
 public class Hello {

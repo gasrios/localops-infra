@@ -8,7 +8,7 @@ spec:
     app: hello
   ports:
   - nodePort: 30000
-    port: 8080
+    port: 8081
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -28,4 +28,4 @@ spec:
       - name: hello-container
         image: REPOSITORY/hello:latest
         ports:
-        - containerPort: 8080
+        - containerPort: 8081

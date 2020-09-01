@@ -7,8 +7,8 @@ spec:
   selector:
     app: ipify
   ports:
-  - nodePort: 30000
-    port: 8080
+  - nodePort: 30001
+    port: 8082
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -28,4 +28,4 @@ spec:
       - name: ipify-container
         image: REPOSITORY/ipify:latest
         ports:
-        - containerPort: 8080
+        - containerPort: 8082

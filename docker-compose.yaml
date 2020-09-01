@@ -4,4 +4,9 @@ services:
     build:
       context: services/hello
     ports:
-      - "30000:8080"
+      - "30000:8081"
+  ipify:
+    build:
+      context: services/ipify
+    ports:
+      - "30001:8082"

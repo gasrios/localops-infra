@@ -12,18 +12,18 @@ docker: clean build publish
 clean:
 	./gradlew clean
 
-build: build/libs/hello.jar
-build/libs/hello.jar: $(shell find src/main/java -type f)
+build: build/libs/ipify.jar
+build/libs/ipify.jar: $(shell find src/main/java -type f)
 	./gradlew bootRepackage
 
 publish: build/$(ENVIRONMENT).yaml
 build/$(ENVIRONMENT).yaml: templates/$(ENVIRONMENT).yaml $(shell find src/main/java -type f)
 	mkdir -p build
 	sed \
-		's/image: REPOSITORY\/hello:.*/image: $(REPOSITORY)\/hello:$(VERSION)/' \
+		's/image: REPOSITORY\/ipify:.*/image: $(REPOSITORY)\/ipify:$(VERSION)/' \
 		templates/$(ENVIRONMENT).yaml > build/$(ENVIRONMENT).yaml
-	docker build -t $(REPOSITORY)/hello:$(VERSION) .
-	docker push $(REPOSITORY)/hello
+	docker build -t $(REPOSITORY)/ipify:$(VERSION) .
+	docker push $(REPOSITORY)/ipify
 
 deploy:
 	kubectl config use-context $(ENVIRONMENT)
@@ -31,5 +31,5 @@ deploy:
 
 undeploy:
 	kubectl config use-context $(ENVIRONMENT)
-	kubectl delete --ignore-not-found service hello-service
-	kubectl delete --ignore-not-found deployment hello-deployment
+	kubectl delete --ignore-not-found service ipify-service
+	kubectl delete --ignore-not-found deployment ipify-deployment

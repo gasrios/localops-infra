@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: ipify-service
+spec:
+  type: NodePort
+  selector:
+    app: ipify
+  ports:
+  - nodePort: 30000
+    port: 8080
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ipify-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ipify
+  template:
+    metadata:
+      labels:
+        app: ipify
+    spec:
+      containers:
+      - name: ipify-container
+        image: REPOSITORY/ipify:latest
+        ports:
+        - containerPort: 8080

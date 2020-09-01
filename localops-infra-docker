@@ -29,12 +29,10 @@ deploy)
 
  for SERVICE in $(ls services)
  do
-  make -C services/$SERVICE
+  make -C services/$SERVICE docker
  done
 
  docker-compose up --build &
-
- sleep 60
 
  ;;
 undeploy)

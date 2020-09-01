@@ -12,15 +12,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 @SpringBootApplication
 @RestController
-public class Hello {
+public class Ipify {
 
 	public static void main(String[] args) {
-		SpringApplication.run(Hello.class, args);
+		SpringApplication.run(Ipify.class, args);
 	}
 
 	@RequestMapping(method = RequestMethod.GET, value  = "/")
-	public ResponseEntity<String> root() throws IOException {
-		return new ResponseEntity<String>("Hello world!", HttpStatus.OK);
-	}
+	public ResponseEntity<String> root() throws IOException {}
 
 }

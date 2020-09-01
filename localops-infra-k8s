@@ -46,7 +46,7 @@ make_services()
 
 case "${1-}" in
 deploy)
- TARGET='all'
+ TARGET=''
  ;;
 undeploy)
  TARGET='undeploy'

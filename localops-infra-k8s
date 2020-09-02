@@ -22,6 +22,14 @@
 
 set -o errexit -o nounset -o pipefail -o xtrace
 
+make_services()
+{
+ for SERVICE in $(ls services)
+ do
+  make -C services/$SERVICE $@
+ done
+}
+
 if [ -z ${KUBECONFIG+x} ]
 then
  echo "KUBECONFIG is not set."
@@ -36,23 +44,18 @@ fi
 
 kubectl config use-context $CONTEXT
 
-make_services()
-{
- for SERVICE in $(ls services)
- do
-  make -C services/$SERVICE ${1-}
- done
-}
-
 case "${1-}" in
 deploy)
- TARGET=''
+ TARGET='clean pipeline'
+ ;;
+update)
+ TARGET='pipeline'
  ;;
 undeploy)
  TARGET='undeploy'
  ;;
 *)
- echo "Usage: localops-infra-k8s {deploy|undeploy}"
+ echo "Usage: localops-infra-k8s {deploy|update|undeploy}"
  exit 1
  ;;
 esac

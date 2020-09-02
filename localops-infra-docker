@@ -22,24 +22,35 @@
 
 set -o errexit -o nounset -o pipefail -o xtrace
 
-case "${1-}" in
-deploy)
+make_services()
+{
 
  docker-compose down
 
  for SERVICE in $(ls services)
  do
-  make -C services/$SERVICE docker
+  make -C services/$SERVICE $@
  done
 
  docker-compose up --build &
 
+}
+
+case "${1-}" in
+deploy)
+ TARGET='clean docker'
+ ;;
+update)
+ TARGET='docker'
  ;;
 undeploy)
  docker-compose down
+ exit 0;
  ;;
 *)
- echo "Usage: localops-infra-k8s {deploy|undeploy}"
+ echo "Usage: localops-infra-docker {deploy|update|undeploy}"
  exit 1
  ;;
 esac
+
+make_services ${TARGET} && exit 0 || exit 1

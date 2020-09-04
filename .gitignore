@@ -5,3 +5,4 @@ services/*/.project
 services/*/.settings/
 services/*/bin/
 services/*/build/
+services/*/gradlew.bat
